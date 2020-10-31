@@ -2,10 +2,13 @@ const express = require('express');
 const morgan = require('morgan');
 const handlebars = require('express-handlebars');
 const path = require('path');
+const db = require('./configs/db');
 
 const route = require('./routes');
 
 const app = express();
+
+db.connect();
 
 app.use(morgan('combined'));
 
@@ -19,7 +22,7 @@ app.engine('hbs', handlebars({
     extname: '.hbs'
 }));
 app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'resources/views'));
+app.set('views', path.join(__dirname, 'resources', 'views'));
 
 const port = 3000;
 
