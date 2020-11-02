@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const handlebars = require('express-handlebars');
 const path = require('path');
+const methodOverride = require('method-override')
 const db = require('./configs/db');
 
 const route = require('./routes');
@@ -16,6 +17,8 @@ app.use(express.urlencoded({
     extended: true
 }));
 app.use(express.json());
+
+app.use(methodOverride('_method'));
 
 // Template engine
 app.engine('hbs', handlebars({
